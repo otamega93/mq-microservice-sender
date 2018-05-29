@@ -12,7 +12,7 @@ public class MessageConsumer {
 
     private static final Logger logger = LoggerFactory.getLogger(MessageConsumer.class);
 
-    @RabbitListener(queues = {RabbitMqConfiguration.queueName})
+    @RabbitListener(queues = {RabbitMqConfiguration.queueNamealter})
     public void receiveMessage(String message) {
         logger.info("Received Message: " + message);
     }

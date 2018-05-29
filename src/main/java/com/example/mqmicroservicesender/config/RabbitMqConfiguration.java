@@ -19,6 +19,7 @@ import com.example.mqmicroservicesender.mq.MessageConsumer;
 public class RabbitMqConfiguration {
 
     public final static String queueName = "com.baeldung.spring-amqp-simple.queue";
+    public final static String queueNamealter = "com.baeldung.spring-amqp-simple.queue.alter";
     public final static String exchangeName = "com.baeldung.spring-amqp-simple.exchange";
 
     @Bean
@@ -26,6 +27,11 @@ public class RabbitMqConfiguration {
         return new Queue(queueName, false);
     }
 
+    @Bean
+    Queue queueAlter() {
+        return new Queue(queueNamealter, false);
+    }
+    
     @Bean
     Exchange exchange() {
         return new DirectExchange(exchangeName);
@@ -35,16 +41,21 @@ public class RabbitMqConfiguration {
     Binding binding(Queue queue, DirectExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(queueName);
     }
-
+    
     @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-            MessageListenerAdapter listenerAdapter) {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory);
-        container.setQueueNames(queueName);
-        container.setMessageListener(listenerAdapter);
-        return container;
+    Binding bindingAlter(Queue queueAlter, DirectExchange exchange) {
+        return BindingBuilder.bind(queueAlter).to(exchange).with(queueNamealter);
     }
+
+//    @Bean
+//    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
+//            MessageListenerAdapter listenerAdapter) {
+//        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+//        container.setConnectionFactory(connectionFactory);
+//        container.setQueueNames(queueNamealter);
+//        container.setMessageListener(listenerAdapter);
+//        return container;
+//    }
 
     @Bean
     MessageListenerAdapter listenerAdapter(MessageConsumer messageReceiver) {

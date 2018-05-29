@@ -43,7 +43,7 @@ public class OrderController {
 		
 		CompletedOrder savedOrder = orderRepository.save(order);
         log.info("Sending message...");
-        rabbitTemplate.convertAndSend(RabbitMqConfiguration.queueName, savedOrder.toString());
+        rabbitTemplate.convertAndSend(RabbitMqConfiguration.queueNamealter, savedOrder.toString());
         
 		return new ResponseEntity<CompletedOrder>(savedOrder, HttpStatus.CREATED);
 	}
