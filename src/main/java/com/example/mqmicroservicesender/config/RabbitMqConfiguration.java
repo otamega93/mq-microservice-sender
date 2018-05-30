@@ -12,7 +12,7 @@ import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.example.mqmicroservicesender.mq.MessageConsumer;
+//import com.example.mqmicroservicesender.mq.MessageConsumer;
 
 @Configuration
 @EnableRabbit
@@ -57,8 +57,8 @@ public class RabbitMqConfiguration {
 //        return container;
 //    }
 
-    @Bean
-    MessageListenerAdapter listenerAdapter(MessageConsumer messageReceiver) {
-        return new MessageListenerAdapter(messageReceiver, "receiveMessage");
-    }
+//    @Bean
+//    MessageListenerAdapter listenerAdapter(MessageConsumer messageReceiver) {
+//        return new MessageListenerAdapter(messageReceiver, "receiveMessage");
+//    }
 }
